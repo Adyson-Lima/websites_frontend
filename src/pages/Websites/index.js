@@ -1,8 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import api from '../../services/api';
+import api from '../../services/api';
 
 export default function Websites(){
+
+  const[my_websites, setWebsites] = useState([]);
+  const navigate = useNavigate();
+
+  // read, busca todos os registros na api
+  useEffect(() => {
+    api.get('api/v1/websites',{})
+    .then(response => {setWebsites(response.data)})
+  }, []);
 
   return(
 
@@ -18,27 +27,30 @@ export default function Websites(){
         <table data-testid="mytable" className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
+              <th scope="col">Id</th>
+              <th scope="col">URL</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td>
+            {my_websites.map(website => (
+              <tr key={website.id}>
+                <th scope="row">{website.id}</th>
+                  <td>{website.url}</td>
+                  <td>{website.description}</td>
+                  <td>
 
-                  <button data-testid="mybtn1" type="button"
-                  className="btn btn-outline-info" style={{margin: '2px'}}>Editar</button>
+                    <button data-testid="mybtn1" type="button"
+                    className="btn btn-outline-info" style={{margin: '2px'}}>Editar</button>
 
-                  <button data-testid="mybtn2" type="button"
-                  className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
+                    <button data-testid="mybtn2" type="button"
+                    className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
 
-                </td>
-            </tr>
+                  </td>
+              </tr>
+            ))}
+            
           </tbody>
         </table>
 
