@@ -24,4 +24,8 @@ describe('Testes da tela Websites', () => {
     expect(screen.getByTestId('mytable')).toBeInTheDocument();
   });
 
+  it('Existe botão editar em Websites?', () => {
+    expect(screen.getByTestId('mybtn1')).toBeInTheDocument();
+  });
+
 });
