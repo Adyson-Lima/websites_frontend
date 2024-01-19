@@ -16,4 +16,8 @@ describe('Testes da tela Websites', () => {
     expect(screen.getByTestId('mycard')).toBeInTheDocument();
   });
 
+  it('Existe link Novo em Websites?', () => {
+    expect(screen.getByTestId('mylink')).toBeInTheDocument();
+  });
+
 });
