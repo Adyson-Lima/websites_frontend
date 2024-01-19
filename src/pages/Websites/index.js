@@ -22,6 +22,16 @@ export default function Websites(){
     }
   }
 
+  // delete, exclui um registro na api
+  async function deleteWebsite(id){
+    try {
+      await api.delete(`api/v1/websites/${id}`,{});
+      setWebsites(my_websites.filter(website => website.id !== id));
+    } catch (error) {
+      alert('erro ao excluir');      
+    }
+  }
+
   return(
 
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
@@ -55,7 +65,8 @@ export default function Websites(){
                     onClick={() => updateWebsite(website.id)}>Editar</button>
 
                     <button data-testid="mybtn2" type="button"
-                    className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
+                    className="btn btn-outline-danger" style={{margin: '2px'}}
+                    onClick={() => deleteWebsite(website.id)}>Excluir</button>
 
                   </td>
               </tr>
